@@ -11,12 +11,30 @@ app.get('/nueva-ruta', (req, res) => {
 });
 
 app.get('/productos', (req, res) => {
+  res.json([
+    { name: 'Producto 1', price: 1000 },
+    { name: 'Producto 2', price: 2500 },
+  ]);
+});
+
+//req (request) res (response)
+app.get('/productos/:id', (req, res) => {
+  ///productos/:id aqui el id es un parametro por tiene : antes
+  const { id } = req.params;
   res.json({
-    name: 'Producto 1',
-    price: 1000,
+    id,
+    name: 'Product 2',
+    price: 2000,
   });
 });
 
+app.get('/caterories/:categoryId/products/:productId', (req, res) => {
+  const { categoryId, productId } = req.params;
+  res.json({
+    categoryId,
+    productId,
+  });
+});
 app.listen(port, () => {
   console.log('Mi puerto ' + port);
 });
