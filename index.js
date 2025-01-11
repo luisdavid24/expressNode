@@ -25,17 +25,6 @@ app.listen(port, () => {
   console.log('Mi puerto ' + port);
 });
 
-app.get('/users', (req, res) => {
-  const { limit, offset } = req.query;
-  if (limit && offset) {
-    res.json({
-      limit,
-      offset,
-    });
-  } else {
-    res.send('No hay parametros');
-  }
-});
 //http://localhost:3000/users?limit=10&offset=20
 
 app.get('/purchaseOrders', (req, res) => {
@@ -50,4 +39,4 @@ app.get('/purchaseOrders/:id', (req, res) => {
   res.json({ id, name: 'orden1' + id, value: 2000 });
 });
 
-//categorys users and ordenes de compra con un path extra api/
+//categorys  and ordenes de compra con un path extra api/
