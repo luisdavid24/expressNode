@@ -4,6 +4,8 @@ const routerApi = require('./routes/index.js');
 const app = express();
 const port = 3000;
 
+app.use(express.json()); //Esta es para poder informacion tipo json
+
 app.get('/', (req, res) => {
   res.send('Hola mi server en express');
 });
