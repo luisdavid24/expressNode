@@ -8,24 +8,11 @@ app.get('/', (req, res) => {
   res.send('Hola mi server en express');
 });
 
-app.get('/nueva-ruta', (req, res) => {
-  res.send('Hola, soy tu nueva ruta');
-});
-
 routerApi(app);
 
-app.get('/caterories/:categoryId/products/:productId', (req, res) => {
-  const { categoryId, productId } = req.params;
-  res.json({
-    categoryId,
-    productId,
-  });
-});
 app.listen(port, () => {
   console.log('Mi puerto ' + port);
 });
-
-//http://localhost:3000/users?limit=10&offset=20
 
 app.get('/purchaseOrders', (req, res) => {
   res.json([
@@ -40,3 +27,11 @@ app.get('/purchaseOrders/:id', (req, res) => {
 });
 
 //categorys  and ordenes de compra con un path extra api/
+
+/* app.get('/caterories/:categoryId/products/:productId', (req, res) => {
+  const { categoryId, productId } = req.params;
+  res.json({
+    categoryId,
+    productId,
+  });
+}); */

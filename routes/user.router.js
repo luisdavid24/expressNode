@@ -44,3 +44,4 @@ router.get('/api/:id', (req, res) => {
 });
 
 module.exports = router;
+//http://localhost:3000/users?limit=10&offset=20
