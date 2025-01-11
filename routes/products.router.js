@@ -3,6 +3,7 @@ const { faker } = require('@faker-js/faker');
 
 const router = express.Router();
 
+//http://localhost:3000/products?size=2 Cambiando el valor de size puedo cambiar el limit
 router.get('/', (req, res) => {
   const products = [];
   const { size } = req.query;
@@ -31,4 +32,4 @@ router.get('/:id', (req, res) => {
   });
 });
 
-modulo.exports = router;
+module.exports = router;

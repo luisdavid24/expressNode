@@ -1,5 +1,5 @@
 const express = require('express');
-const { faker } = require('@faker-js/faker');
+const routerApi = require('./routes/index.js');
 
 const app = express();
 const port = 3000;
@@ -11,6 +11,8 @@ app.get('/', (req, res) => {
 app.get('/nueva-ruta', (req, res) => {
   res.send('Hola, soy tu nueva ruta');
 });
+
+routerApi(app);
 
 app.get('/caterories/:categoryId/products/:productId', (req, res) => {
   const { categoryId, productId } = req.params;
@@ -33,7 +35,8 @@ app.get('/users', (req, res) => {
   } else {
     res.send('No hay parametros');
   }
-}); //http://localhost:3000/users?limit=10&offset=20
+});
+//http://localhost:3000/users?limit=10&offset=20
 
 app.get('/purchaseOrders', (req, res) => {
   res.json([
