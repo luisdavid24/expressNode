@@ -3,7 +3,7 @@ const { faker } = require('@faker-js/faker');
 
 const router = express.Router();
 
-app.get('/other', (req, res) => {
+router.get('/other', (req, res) => {
   const { limit, offset } = req.query;
   if (limit && offset) {
     res.json({
