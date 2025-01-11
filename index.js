@@ -50,15 +50,4 @@ app.get('/purchaseOrders/:id', (req, res) => {
   res.json({ id, name: 'orden1' + id, value: 2000 });
 });
 
-app.get('/userr', (res, req) => {
-  res.json([
-    { name: 'user1', nickName: 'nickName1' },
-    { name: 'user2', nickName: 'nickName2' },
-    { name: 'user3', nickName: 'nickName3' },
-  ]);
-});
-
-app.get('/userr/:id', (res, req) => {
-  const { id } = req.params;
-  res.json({ id, name: 'user' + id, nickName: 'nickName' + id });
-});
+//categorys users and ordenes de compra con un path extra api/
