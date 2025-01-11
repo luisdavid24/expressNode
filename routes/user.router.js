@@ -3,7 +3,7 @@ const { faker } = require('@faker-js/faker');
 
 const router = express.Router();
 
-app.get('/api/other', (req, res) => {
+app.get('/other', (req, res) => {
   const { limit, offset } = req.query;
   if (limit && offset) {
     res.json({
@@ -14,7 +14,7 @@ app.get('/api/other', (req, res) => {
     res.send('No hay parametros');
   }
 });
-router.get('/api', (req, res) => {
+router.get('/', (req, res) => {
   const users = [];
   const { size } = req.query;
 
@@ -29,11 +29,11 @@ router.get('/api', (req, res) => {
   }
   res.json(users);
 });
-router.get('/api/filterUsers', (req, res) => {
+router.get('/filterUsers', (req, res) => {
   res.send('Yo soy un filter');
 });
 
-router.get('/api/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const { id } = req.params;
   res.json({
     id,
