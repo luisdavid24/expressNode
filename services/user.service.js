@@ -24,8 +24,26 @@ class UserService {
   findOne(id) {
     return this.users.find((item) => item.id === id);
   }
-  update() {}
-  delete() {}
+  update(id, changes) {
+    const index = this.users.findIndex((item) => item.id === id);
+    if (index === -1) {
+      throw new Error('User not found');
+    }
+    const user = this.users[index];
+    this.users[index] = {
+      ...user,
+      ...changes,
+    };
+    return this.users[index];
+  }
+  delete(id) {
+    const index = this.users.findIndex((item) => item.id === id);
+    if (index === -1) {
+      throw new Error('Product not found');
+    }
+    this.users.splice(index, 1);
+    return { id };
+  }
 }
 
 module.exports = UserService;
