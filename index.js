@@ -4,7 +4,11 @@ const routerApi = require('./routes/index.js');
 const app = express();
 const port = 3000;
 
-const { logErrors, errorHandler } = require('./middlewares/error.handler.js');
+const {
+  logErrors,
+  errorHandler,
+  boomErrorHandler,
+} = require('./middlewares/error.handler.js');
 
 app.use(express.json()); //Esta es para poder informacion tipo json
 
@@ -19,6 +23,7 @@ app.listen(port, () => {
 });
 
 //El orden en que se ponga sera el orden de seran usado
+app.use(boomErrorHandler);
 app.use(logErrors);
 app.use(errorHandler);
 /* app.get('/purchaseOrders', (req, res) => {
