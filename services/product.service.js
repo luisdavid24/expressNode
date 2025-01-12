@@ -29,6 +29,7 @@ class ProductService {
     return this.products;
   }
   async findOne(id) {
+    //const name = this.getTotal();
     return this.products.find((item) => item.id === id);
   }
   async update(id, changes) {
