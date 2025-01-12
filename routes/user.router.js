@@ -1,7 +1,9 @@
 const express = require('express');
-const { faker } = require('@faker-js/faker');
+const UserService = require('./../services/user.service');
+const { sr_RS_latin } = require('@faker-js/faker');
 
 const router = express.Router();
+const service = new UserService();
 
 router.get('/other', (req, res) => {
   const { limit, offset } = req.query;
@@ -15,18 +17,8 @@ router.get('/other', (req, res) => {
   }
 });
 router.get('/', (req, res) => {
-  const users = [];
-  const { size } = req.query;
+  const users = service.find();
 
-  const limit = size || 5;
-
-  for (let index = 0; index < limit; index++) {
-    users.push({
-      name: faker.person.fullName(),
-      nickName: 'Not real' + faker.person.fullName(),
-      email: faker.internet.email(),
-    });
-  }
   res.json(users);
 });
 router.get('/filterUsers', (req, res) => {
@@ -35,12 +27,8 @@ router.get('/filterUsers', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  res.json({
-    id,
-    name: 'user' + id,
-    nickName: 'nickName' + id,
-    email: 'example@gmail.com',
-  });
+  const user = service.findOne(id);
+  res.json(user);
 });
 
 module.exports = router;
