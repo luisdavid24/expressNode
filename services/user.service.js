@@ -1,4 +1,5 @@
 const { faker } = require('@faker-js/faker');
+const boom = require('@hapi/boom');
 
 class UserService {
   constructor() {
@@ -10,24 +11,38 @@ class UserService {
 
     for (let index = 0; index < limit; index++) {
       this.users.push({
-        id: faker.database.mongodbObjectId(),
+        id: faker.string.uuid(),
         name: faker.person.fullName(),
         nickName: 'Not real ' + faker.person.fullName(),
         email: faker.internet.email(),
       });
     }
   }
-  create() {}
-  find() {
+  async create(data) {
+    const newUser = {
+      id: faker.string.uuid(),
+      ...data,
+    };
+    this.users.push(newUser);
+    return newUser;
+  }
+  async find() {
     return this.users;
   }
-  findOne(id) {
-    return this.users.find((item) => item.id === id);
+  async findOne(id) {
+    const user = this.users.find((item) => item.id === id);
+    if (!user) {
+      throw boom.notFound('User not found');
+    }
+    if (user.isBlock) {
+      throw boom.conflict('User is block');
+    }
+    return user;
   }
-  update(id, changes) {
+  async update(id, changes) {
     const index = this.users.findIndex((item) => item.id === id);
     if (index === -1) {
-      throw new Error('User not found');
+      throw boom.notFound('User not found');
     }
     const user = this.users[index];
     this.users[index] = {
@@ -36,10 +51,10 @@ class UserService {
     };
     return this.users[index];
   }
-  delete(id) {
+  async delete(id) {
     const index = this.users.findIndex((item) => item.id === id);
     if (index === -1) {
-      throw new Error('Product not found');
+      throw boom.notFound('Product not found');
     }
     this.users.splice(index, 1);
     return { id };
