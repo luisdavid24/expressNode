@@ -33,6 +33,7 @@ class ProductService {
   async findOne(id) {
     //const name = this.getTotal();
     const product = this.products.find((item) => item.id === id);
+    console.log(product);
     if (!product) {
       throw boom.notFound('Product not found');
     }

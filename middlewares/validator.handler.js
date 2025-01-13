@@ -3,7 +3,7 @@ const { faker } = require('@faker-js/faker');
 function validatorHandler(schema, property) {
   return (req, res, next) => {
     const data = req[property];
-    const { error } = schema.validate();
+    const { error } = schema.validate(data);
     if (error) {
       next(boom.badRequest(error));
     }
