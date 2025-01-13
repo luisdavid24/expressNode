@@ -22,7 +22,7 @@ router.get('/filter', (req, res) => {
 
 router.get(
   '/:id',
-  validatorHandler(getProductSchema, 'params'),
+  validatorHandler(getProductSchema, 'params'), //Params indica donde va encontrar la informacion
   async (req, res, next) => {
     try {
       const { id } = req.params;

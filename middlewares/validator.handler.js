@@ -1,4 +1,4 @@
-const { faker } = require('@faker-js/faker');
+const boom = require('@hapi/boom');
 
 function validatorHandler(schema, property) {
   return (req, res, next) => {

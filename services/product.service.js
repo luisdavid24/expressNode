@@ -11,7 +11,7 @@ class ProductService {
 
     for (let index = 0; index < limit; index++) {
       this.products.push({
-        id: faker.database.mongodbObjectId(),
+        id: faker.string.uuid(),
         name: faker.commerce.productName(),
         price: parseInt(faker.commerce.price(), 10),
         image: faker.image.urlLoremFlickr(),
