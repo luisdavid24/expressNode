@@ -7,21 +7,21 @@ const email = Joi.string().email({
   tlds: { allow: ['com', 'net'] },
 });
 
-const createProductSchema = Joi.object({
+const createUserSchema = Joi.object({
   name: name.required(),
   price: price.required(),
   image: image.required(),
   email: email.required(),
 });
 
-const updateProductSchema = Joi.object({
+const updateUserSchema = Joi.object({
   name: name,
   price: price,
   image: image,
   email: email,
 });
 
-const getProductSchema = Joi.object({
+const getUserSchema = Joi.object({
   id: id.required(),
 });
-module.exports = { createProductSchema, updateProductSchema, getProductSchema };
+module.exports = { createUserSchema, updateUserSchema, getUserSchema };
