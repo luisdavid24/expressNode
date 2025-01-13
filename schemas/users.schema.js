@@ -2,6 +2,8 @@ const Joi = require('joi');
 
 const id = Joi.string().uuid();
 const name = Joi.string().min(3).max(15);
+const nickName = Joi.string().min(4).max(20);
+
 const email = Joi.string().email({
   minDomainSegments: 2,
   tlds: { allow: ['com', 'net'] },
@@ -9,15 +11,13 @@ const email = Joi.string().email({
 
 const createUserSchema = Joi.object({
   name: name.required(),
-  price: price.required(),
-  image: image.required(),
+  nickName: nickName.required(),
   email: email.required(),
 });
 
 const updateUserSchema = Joi.object({
   name: name,
-  price: price,
-  image: image,
+  nickName: nickName,
   email: email,
 });
 

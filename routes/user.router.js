@@ -22,8 +22,8 @@ const service = new UserService();
     res.send('No hay parametros');
   }
 }); */
-router.get('/', (req, res) => {
-  const users = service.find();
+router.get('/', async (req, res) => {
+  const users = await service.find();
 
   res.json(users);
 });
