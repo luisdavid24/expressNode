@@ -34,9 +34,7 @@ class UserService {
     if (!user) {
       throw boom.notFound('User not found');
     }
-    if (user.isBlock) {
-      throw boom.conflict('User is block');
-    }
+
     return user;
   }
   async update(id, changes) {

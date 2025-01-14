@@ -33,11 +33,11 @@ router.get('/filterUsers', (req, res) => {
 
 router.get(
   '/:id',
-  validatorHandler(createUserSchema, 'params'),
-  (req, res, next) => {
+  validatorHandler(getUserSchema, 'params'),
+  async (req, res, next) => {
     try {
       const { id } = req.params;
-      const user = service.findOne(id);
+      const user = await service.findOne(id);
       res.json(user);
     } catch (error) {
       next(error);
@@ -45,8 +45,8 @@ router.get(
   },
 );
 router.post(
-  '/:id',
-  validatorHandler(updateUserSchema, 'body'),
+  '/',
+  validatorHandler(createUserSchema, 'body'),
   async (req, res) => {
     const body = req.body;
     const newUser = await service.create(body);
@@ -69,9 +69,9 @@ router.patch(
     }
   },
 );
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   const { id } = req.params;
-  const response = service.delete(id);
+  const response = await service.delete(id);
 
   res.json(response);
 });
