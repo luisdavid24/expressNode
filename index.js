@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const routerApi = require('./routes/index.js');
 
 const app = express();
@@ -10,7 +11,18 @@ const {
   boomErrorHandler,
 } = require('./middlewares/error.handler.js');
 
-app.use(express.json()); //Esta es para poder informacion tipo json
+app.use(express.json());
+const whitelist = ['htt://localhost:8080', 'https//myapp.co'];
+const options = {
+  origin: (origin, callback) => {
+    if (whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('No permitido '));
+    }
+  },
+};
+app.use(cors(options)); //Esta es para poder informacion tipo json
 
 app.get('/', (req, res) => {
   res.send('Hola mi server en express');
