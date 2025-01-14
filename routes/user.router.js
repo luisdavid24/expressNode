@@ -58,11 +58,11 @@ router.patch(
   '/:id',
   validatorHandler(getUserSchema, 'params'),
   validatorHandler(updateUserSchema, 'body'),
-  (req, res) => {
+  async (req, res, next) => {
     try {
       const { id } = req.params;
       const body = req.body;
-      const user = service.update(id, body);
+      const user = await service.update(id, body);
       res.json(user);
     } catch (error) {
       next(error);
